@@ -10,12 +10,13 @@ import matplotlib.pyplot as plt
 #User Interface
 def main():
   symbol = input("Enter the stock symbol you are looking for: ").upper()
+  
   print("Select the time series function for the chart you want to generate:")
   print("1. Daily (TIME_SERIES_DAILY)")
   print("2. Weekly (TIME_SERIES_WEEKLY)")
   print("3. Monthly (TIME_SERIES_MONTHLY)")
   print("4. Intraday (TIME_SERIES_INTRADAY)")
-  function_choice = input("Enter your choice (1/2/3/4): ")
+  function_choice = input("Enter time series option (1, 2, 3, 4): ")
 
   if function_choice == '1':
     function = 'TIME_SERIES_DAILY'
