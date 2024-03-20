@@ -29,6 +29,18 @@ def main():
       print("Invalid choice. Please select 1, 2, 3, or 4.")
       return
 
+  start_date = input("Enter the beginning date in YYYY-MM-DD format: ")
+  end_date = input("Enter the end date in YYYY-MM-DD format: ")
+  chart_type = input("Enter the chart type (line/bar/scatter): ").lower()
+
+if start_date > end_date:
+  print("Error: End date cannot be before the begin date.")
+  return
+
+  #Hold API key for Alpha Vantage 
+  api_key = "AU63WJRRMDHJZX92"
+
+
 if __name__ == "__main__":
 def main()
 
