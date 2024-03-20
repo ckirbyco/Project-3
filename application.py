@@ -1,7 +1,7 @@
 import requests
 import matplotlib.pyplot as plt
 
-#API Key
+#Stock data function to query API
 def get_stock_data(symbol, function, start_date, end_date, api_key, interval=None):
     if function.startswith('TIME_SERIES_INTRADAY'):
         url = f"https://www.alphavantage.co/query?function={function}&symbol={symbol}&interval={interval}&apikey={api_key}&outputsize=full"
