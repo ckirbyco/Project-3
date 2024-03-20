@@ -55,7 +55,13 @@ if start_date > end_date:
   return
 
   #Hold API key for Alpha Vantage 
-  api_key = "AU63WJRRMDHJZX92"
+  api_key = "VHI1NLV7FLZATH71"
+
+  stock_data = get_stock_data(symbol, function, start_date, end_date, api_key, interval)
+  if stock_data is None: # Handle the case when no data is found
+    print("Exiting the program. Please try again with a different date range.")
+    return
+  generate_graph(stock_data, chart_type)
 
 
 if __name__ == "__main__":
