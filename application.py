@@ -2,7 +2,43 @@ import requests
 import matplotlib.pyplot as plt
 
 #API Key
-
+def get_stock_data(symbol, function, start_date, end_date, api_key, interval=None):
+    if function.startswith('TIME_SERIES_INTRADAY'):
+        url = f"https://www.alphavantage.co/query?function={function}&symbol={symbol}&interval={interval}&apikey={api_key}&outputsize=full"
+    else:
+        url = f"https://www.alphavantage.co/query?function={function}&symbol={symbol}&apikey={api_key}&outputsize=full"
+    
+    response = requests.get(url)
+    data = response.json()
+    
+    if function.startswith('TIME_SERIES_INTRADAY'):
+        time_series_key = next((key for key in data.keys() if "Time Series" in key), None)
+        if not time_series_key:
+            print("Error: Intraday data not found in API response.")
+            return None
+        time_series_data = data[time_series_key]
+    elif 'Time Series (Daily)' in data:
+        time_series_data = data['Time Series (Daily)']
+    elif 'Weekly Time Series' in data:
+        time_series_data = data['Weekly Time Series']
+    elif 'Monthly Time Series' in data:
+        time_series_data = data['Monthly Time Series']
+    else:
+        print(f"Error: {function} data not found in API response.")
+        return None
+    
+    if function.startswith('TIME_SERIES_INTRADAY'):
+        filtered_data = {datetime_key: values for datetime_key, values in time_series_data.items()
+                         if start_date <= datetime_key.split()[0] <= end_date}
+    else:
+        filtered_data = {date: values for date, values in time_series_data.items()
+                         if start_date <= date <= end_date}
+    
+    if not filtered_data:
+        print(f"No data found for {symbol} within the given date range. Please try a different date range.")
+        return None
+    
+    return filtered_data
 
 #Graph
 
