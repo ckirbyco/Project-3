@@ -84,18 +84,19 @@ def main():
     function = 'TIME_SERIES_MONTHLY'
   elif function_choice == '4':
     function = 'TIME_SERIES_INTRADAY'
-        print("Select the intraday interval:")
-        print("1. 1min")
-        print("2. 5min")
-        print("3. 15min")
-        print("4. 30min")
-        print("5. 60min")
-        interval_choice = input("Enter your choice (1, 2, 3, 4, 5): ")
-        intervals = {'1': '1min', '2': '5min', '3': '15min', '4': '30min', '5': '60min'}
-        interval = intervals.get(interval_choice, None)
-        if interval is None:
-            print("Invalid interval choice. Please select 1, 2, 3, 4, or 5.")
-            return
+    print("Select the intraday interval:")
+    print("1. 1min")
+    print("2. 5min")
+    print("3. 15min")
+    print("4. 30min")
+    print("5. 60min")
+    interval_choice = input("Enter your choice (1, 2, 3, 4, 5): ")
+    intervals = {'1': '1min', '2': '5min', '3': '15min', '4': '30min', '5': '60min'}
+    interval = intervals.get(interval_choice, None)
+      
+    if interval is None:
+        print("Invalid interval choice. Please select 1, 2, 3, 4, or 5.")
+        return
     else:
         print("Invalid choice. Please select 1, 2, 3, or 4.")
         return
