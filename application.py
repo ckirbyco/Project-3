@@ -1,7 +1,7 @@
 import requests
 import matplotlib.pyplot as plt
 
-#API Key
+#Stock data function to query API
 def get_stock_data(symbol, function, start_date, end_date, api_key, interval=None):
     if function.startswith('TIME_SERIES_INTRADAY'):
         url = f"https://www.alphavantage.co/query?function={function}&symbol={symbol}&interval={interval}&apikey={api_key}&outputsize=full"
@@ -41,7 +41,25 @@ def get_stock_data(symbol, function, start_date, end_date, api_key, interval=Non
     return filtered_data
 
 #Graph
-
+def generate_graph(data, chart_type):
+    dates = list(data.keys())
+    prices = [float(data[date]['4. close']) for date in dates]
+    
+    plt.figure(figsize=(10, 6))
+    if chart_type == 'line':
+        plt.plot(dates, prices, label='Close Price')
+    elif chart_type == 'bar':
+        plt.bar(dates, prices, color='skyblue', label='Close Price')
+    elif chart_type == 'scatter':
+        plt.scatter(dates, prices, color='red', label='Close Price')
+    
+    plt.title('Stock Prices Over Time')
+    plt.xlabel('Date')
+    plt.ylabel('Price (USD)')
+    plt.xticks(rotation=45)
+    plt.legend()
+    plt.tight_layout()
+    plt.show()
 
 #User Interface
 def main():
